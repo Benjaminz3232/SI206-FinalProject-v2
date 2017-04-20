@@ -313,7 +313,7 @@ for movie in movie_class_instances:
 	if actor_name not in top_actors_of_movies_not_repeated:
 		top_actors_of_movies_not_repeated.append(actor_name)
 # print(top_actors_of_movies_not_repeated)
-twitter_name_search = [get_twitter_name(actor) for actor in top_actors_of_movies_not_repeated] #retrieving twitter name for each top actor fromt the movie instances; list comprehension
+twitter_name_search = [get_twitter_handle(actor) for actor in top_actors_of_movies_not_repeated] #retrieving twitter name for each top actor fromt the movie instances; list comprehension
 # print(twitter_name_search)
 
 
