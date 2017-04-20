@@ -190,78 +190,78 @@ def get_twitter_handle(name):
 
 		r = api.search_users(q=actor_name)
 
-		CACHE_DICTION[actor_name] = response
+		CACHE_DICTION[actor_name] = r
 		# print("fetching\n")
 		cache_file = open(CACHE_FNAME, 'w')
 		cache_file.write(json.dumps(CACHE_DICTION))
 		cache_file.close()
-	for dic in response:
+	for dic in r:
 		if dic['verified'] == True:
 			return '@'+dic['screen_name']
 
 def user_info(user_name):
 	if user_name in CACHE_DICTION:
-		response = CACHE_DICTION[user_name]
+		r = CACHE_DICTION[user_name]
 
 	else:
-		response = api.get_user(user_name)
-		CACHE_DICTION[user_name] = response
+		r = api.get_user(user_name)
+		CACHE_DICTION[user_name] = r
 		# print("fetching\n")
 		cache_file = open(CACHE_FNAME, 'w')
 		cache_file.write(json.dumps(CACHE_DICTION))
 		cache_file.close()
 
-	return response
+	return r
 
 def twitter_search(search_term):
 	if search_term in CACHE_DICTION:
-		response = CACHE_DICTION[search_term]
+		r = CACHE_DICTION[search_term]
 
 	else:
-		response = api.search(q=search_term)
-		CACHE_DICTION[search_term] = response
+		r = api.search(q=search_term)
+		CACHE_DICTION[search_term] = r
 		cache_file = open(CACHE_FNAME, 'w')
 		cache_file.write(json.dumps(CACHE_DICTION))
 		cache_file.close()
 
-	return response['statuses']
+	return r['statuses']
 
 def twitter_neighborhood(twitter_name):
 	pass #still not sure about what the "neighborhood" consists of and what tweepy api method to use
 
 #OMDB request
 def omdb_search(move_title):
+
 	base_url = "http://www.omdbapi.com/?"
 	params_dict = {}
 	params_dict['t'] = move_title
-	response = requests.get(base_url, params=params_dict)
 
-	if response in CACHE_DICTION:
-		CACHE_DICTION[movie_title] = response
+	r = requests.get(base_url, params=params_dict)
+
+	if r in CACHE_DICTION:
+		CACHE_DICTION[movie_title] = r
 
 	else:
-		response = json.loads(response.text)
-		CACHE_DICTION[move_title] = response
+		r = json.loads(r.text)
+		CACHE_DICTION[move_title] = r
 		cache_file = open(CACHE_FNAME, 'w')
 		cache_file.write(json.dumps(CACHE_DICTION))
 		cache_file.close()
-	return response
+	return r
 
 #class to handle the return value of the OMDB search
 class Movie():
 	def __init__(self,movie_dict):
+		self.director = movie_dict['Director']
+		self.actors = movie_dict['Actors']
+		self.plot = movie_dict['Plot']
+		self.imdbrating = movie_dict['imdbRating']
+		self.ratings = movie_dict['Ratings']
 		self.title = movie_dict['Title']
 		self.release_date = movie_dict['Released']
 		self.rated = movie_dict["Rated"]
 		self.languages = movie_dict['Language']
 		self.runtime = movie_dict['Runtime']
-		self.director = movie_dict['Director']
-		self.actors = movie_dict['Actors']
-		self.awards = movie_dict['Awards']
-		self.genre = movie_dict['Genre']
-		self.plot = movie_dict['Plot']
-		self.imdbrating = movie_dict['imdbRating']
-		self.ratings = movie_dict['Ratings']
 		self.imdbID = movie_dict['imdbID']
 
 	def movie_title(self):
@@ -286,9 +286,6 @@ class Movie():
 	def imdb_rating(self):
 		return float(self.imdbrating)
 
-	def movie_genres(self):
-		return self.genre.split(', ')
-
 	def released(self):
 		return self.release_date
 
@@ -304,23 +301,18 @@ class Movie():
 
 
 
-list_of_movies = ['the avengers', 'the big short', 'moonlight', 'manchester by the sea', 'zootopia', "captain america: civil war", 'la la land']
-movie_requests = [omdb_search(movie) for movie in list_of_movies] #list comprehension
+#list_of_movies = ['the avengers', 'the big short', 'moonlight', 'manchester by the sea', 'zootopia', "captain america: civil war", 'la la land']
+#movie_requests = [omdb_search(movie) for movie in list_of_movies] #list comprehension
 # print(movie_requests)
-movie_class_instances = [Movie(movie) for movie in movie_requests] #list comprehension for movie instances
-top_actors_of_movies_not_repeated = []
-for movie in movie_class_instances:
-	actor_name = movie.num1_actor() #getting the top actor for every movie
-	if actor_name not in top_actors_of_movies_not_repeated:
-		top_actors_of_movies_not_repeated.append(actor_name)
+#movie_class_instances = [Movie(movie) for movie in movie_requests] #list comprehension for movie instances
+#top_actors_of_movies_not_repeated = []
+#for movie in movie_class_instances:
+#	actor_name = movie.num1_actor() #getting the top actor for every movie
+#	if actor_name not in top_actors_of_movies_not_repeated:
+#		top_actors_of_movies_not_repeated.append(actor_name)
 # print(top_actors_of_movies_not_repeated)
-twitter_name_search = [get_twitter_handle(actor) for actor in top_actors_of_movies_not_repeated] #retrieving twitter name for each top actor fromt the movie instances; list comprehension
+#twitter_name_search = [get_twitter_handle(actor) for actor in top_actors_of_movies_not_repeated] #retrieving twitter name for each top actor fromt the movie instances; list comprehension
 # print(twitter_name_search)
-
-
-
-
-
 
 class Tweet(object):
 	
@@ -347,10 +339,6 @@ class Tweet(object):
 		return w
 
 
-
-
-
-
 conn = sqlite3.connect('final_probject.db')
 cur = conn.cursor()
 
@@ -374,14 +362,16 @@ table_spec += "Movies (imdbID PRIMARY KEY, title TEXT, director TEXT, languages 
 cur.execute(table_spec)
 
 #passing information into database
+
 movie_table = []
+
 for movie in movie_class_instances:
+	top_actor = movie.num1_actor()
 	imdbID = movie.imdb_ID()
 	title = movie.movie_title()
 	director = movie.movie_director()
-	languages = movie.num_languages()
 	imdbRating = movie.imdb_rating()
-	top_actor = movie.num1_actor()
+	languages = movie.num_languages()
 	tup = (imdbID, title, director, languages, imdbRating, top_actor)
 	movie_table.append(tup)
 
