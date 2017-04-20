@@ -301,42 +301,48 @@ class Movie():
 
 
 
-list_of_movies = ['the avengers', 'the big short', 'moonlight', 'manchester by the sea', 'zootopia', "captain america: civil war", 'la la land']
-movie_requests = [omdb_search(movie) for movie in list_of_movies] #list comprehension
+movies = ['mean girls', 'captain america', 'dare devil', 'superman', 'batman']
+movie_requests = [omdb_search(movie) for movie in movies]
 print(movie_requests)
+
+
 movie_class_instances = [Movie(movie) for movie in movie_requests] #list comprehension for movie instances
 top_actors_of_movies_not_repeated = []
 for movie in movie_class_instances:
 	actor_name = movie.num1_actor() #getting the top actor for every movie
 	if actor_name not in top_actors_of_movies_not_repeated:
 		top_actors_of_movies_not_repeated.append(actor_name)
- print(top_actors_of_movies_not_repeated)
+print(top_actors_of_movies_not_repeated)
 twitter_name_search = [get_twitter_handle(actor) for actor in top_actors_of_movies_not_repeated] #retrieving twitter name for each top actor fromt the movie instances; list comprehension
 print(twitter_name_search)
 
 class Tweet(object):
 	
-	def __init__(self, tweet_list, movie_titles):
+	def __init__(self, tweet_lst, titles):
+
 		self.search = []
 		self.text = []
 		self.id = []
 		self.user = []
 		self.favorites = []
 		self.retweets = []
-		for tweet in tweet_list:
-			for movie in movie_titles:
+
+		for tweet in tweet_lst:
+			for movie in titles:
 				if movie in tweet["text"]:
 					self.search.append(movie)
-			self.text.append(tweet["text"])
-			self.id.append(tweet["id"])
+
 			self.user.append(tweet["user"]["screen_name"])
 			self.favorites.append(tweet["favorite_count"])
+			self.text.append(tweet["text"])
+			self.id.append(tweet["id"])
 			self.retweets.append(tweet["retweet_count"])
 
+
 	def zip_lists(self):
-		m = zip(self.search, self.text, self.id, self.user, self.favorites, self.retweets)
-		w = list(m)
-		return w
+		x = zip(self.search, self.text, self.id, self.user, self.favorites, self.retweets)
+		y = list(x)
+		return y
 
 
 conn = sqlite3.connect('final_probject.db')
