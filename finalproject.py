@@ -301,18 +301,18 @@ class Movie():
 
 
 
-#list_of_movies = ['the avengers', 'the big short', 'moonlight', 'manchester by the sea', 'zootopia', "captain america: civil war", 'la la land']
-#movie_requests = [omdb_search(movie) for movie in list_of_movies] #list comprehension
-# print(movie_requests)
-#movie_class_instances = [Movie(movie) for movie in movie_requests] #list comprehension for movie instances
-#top_actors_of_movies_not_repeated = []
-#for movie in movie_class_instances:
-#	actor_name = movie.num1_actor() #getting the top actor for every movie
-#	if actor_name not in top_actors_of_movies_not_repeated:
-#		top_actors_of_movies_not_repeated.append(actor_name)
-# print(top_actors_of_movies_not_repeated)
-#twitter_name_search = [get_twitter_handle(actor) for actor in top_actors_of_movies_not_repeated] #retrieving twitter name for each top actor fromt the movie instances; list comprehension
-# print(twitter_name_search)
+list_of_movies = ['the avengers', 'the big short', 'moonlight', 'manchester by the sea', 'zootopia', "captain america: civil war", 'la la land']
+movie_requests = [omdb_search(movie) for movie in list_of_movies] #list comprehension
+print(movie_requests)
+movie_class_instances = [Movie(movie) for movie in movie_requests] #list comprehension for movie instances
+top_actors_of_movies_not_repeated = []
+for movie in movie_class_instances:
+	actor_name = movie.num1_actor() #getting the top actor for every movie
+	if actor_name not in top_actors_of_movies_not_repeated:
+		top_actors_of_movies_not_repeated.append(actor_name)
+ print(top_actors_of_movies_not_repeated)
+twitter_name_search = [get_twitter_handle(actor) for actor in top_actors_of_movies_not_repeated] #retrieving twitter name for each top actor fromt the movie instances; list comprehension
+print(twitter_name_search)
 
 class Tweet(object):
 	
