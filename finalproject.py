@@ -144,7 +144,7 @@ import sqlite3
 import re
 import requests
 import webbrowser
-sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer) # to deal with irregular keys such as emojis and stuff
+
 
 ##Tweepy setup
 
@@ -315,6 +315,37 @@ for movie in movie_class_instances:
 # print(top_actors_of_movies_not_repeated)
 twitter_name_search = [get_twitter_name(actor) for actor in top_actors_of_movies_not_repeated] #retrieving twitter name for each top actor fromt the movie instances; list comprehension
 # print(twitter_name_search)
+
+
+
+
+
+
+class Tweet(object):
+	
+	def __init__(self, tweet_list, movie_titles):
+		self.search = []
+		self.text = []
+		self.id = []
+		self.user = []
+		self.favorites = []
+		self.retweets = []
+		for tweet in tweet_list:
+			for movie in movie_titles:
+				if movie in tweet["text"]:
+					self.search.append(movie)
+			self.text.append(tweet["text"])
+			self.id.append(tweet["id"])
+			self.user.append(tweet["user"]["screen_name"])
+			self.favorites.append(tweet["favorite_count"])
+			self.retweets.append(tweet["retweet_count"])
+
+	def zip_lists(self):
+		m = zip(self.search, self.text, self.id, self.user, self.favorites, self.retweets)
+		w = list(m)
+		return w
+
+
 
 
 
