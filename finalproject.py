@@ -155,7 +155,8 @@ access_token_secret = twitter_info.access_token_secret
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
-
+#twitter request
+api = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 
 ## Create initial cache setup
 
