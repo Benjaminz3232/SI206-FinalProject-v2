@@ -196,7 +196,6 @@ movies_list = [
 OMDB_movie_requests = [get_OMDB_data(movie) for movie in movies_list]
 
 
-
 ##Creating class instances of each movie from the movie list
 movie_classinsts = []
 for movie in OMDB_movie_requests:
@@ -204,14 +203,14 @@ for movie in OMDB_movie_requests:
 
 
 ##Getting tweets about movies
-tweets = []
-for movie in movies_list:
-    tweets.append(get_twitter_search_data(movie))
+#tweets = []
+#for movie in movies_list:
+#    tweets.append(get_twitter_search_data(movie))
 
 
-movie_tweets = []
-for movie in movies_list:
-    movie_tweets.append((movie, get_twitter_search_data(movie)))
+#movie_tweets = []
+#for movie in movies_list:
+#    movie_tweets.append((movie, get_twitter_search_data(movie)))
 
 
 
