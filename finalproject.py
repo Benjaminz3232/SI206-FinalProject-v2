@@ -42,11 +42,11 @@ except:
 ##Getting OMDB data functions
 def get_OMDB_data(omdb_search_term):
     if omdb_search_term in CACHE_DICTION:
-        print("\nUsing cached data for OMDB: " + omdb_search_term + "\n")
+        #print("\nUsing cached data for OMDB: " + omdb_search_term + "\n")
         response = CACHE_DICTION[omdb_search_term]
 
     else:
-        print("\nfetching data for OMDB: " + omdb_search_term + "\n")
+        #print("\nfetching data for OMDB: " + omdb_search_term + "\n")
         base_url = "http://www.omdbapi.com/?"
         params = {}
         params['t'] = omdb_search_term
@@ -122,11 +122,11 @@ class Movie(object):
 def get_twitter_search_data(search_term):
 
     if search_term in CACHE_DICTION:
-        print("\nUsing cached data for TWITTER: " + search_term + "\n")
+        #print("\nUsing cached data for TWITTER: " + search_term + "\n")
         response = CACHE_DICTION[search_term]
 
     else:
-        print("\nFetching data for TWITTER:" + search_term + "\n")
+        #print("\nFetching data for TWITTER:" + search_term + "\n")
         results = api.search(q = search_term) # , count = 20 TAKEN OUT
         response = results["statuses"]
 
@@ -141,11 +141,11 @@ def get_twitter_search_data(search_term):
 def get_twitter_user_data(username):
 
     if username in CACHE_DICTION:
-        print("\nUsing cached data for twitter user: " + username + "\n")
+        #print("\nUsing cached data for twitter user: " + username + "\n")
         response = CACHE_DICTION[username]
 
     else:
-        print("\nFetching data for twitter user: " + username + "\n")
+        #print("\nFetching data for twitter user: " + username + "\n")
         response = api.get_user(username)
         CACHE_DICTION[username] = response
 
