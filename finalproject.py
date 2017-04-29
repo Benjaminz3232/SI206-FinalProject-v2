@@ -1,4 +1,3 @@
-
 ## Import statements
 import unittest
 import sqlite3
@@ -7,9 +6,13 @@ import json
 import tweepy
 import twitter_info
 import re
-#from pprint import pprint
+from pprint import pprint
 import itertools
 import collections
+import sys
+import codecs
+sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer)
+
 
 
 ##Twitter authentication
@@ -34,231 +37,231 @@ try:
     CACHE_DICTION = json.loads(cache_contents)
 except:
     CACHE_DICTION = {}
-    #CACHE_DICTION["omdb"] = {}  ##might be more structured, not necessary though
-    #CACHE_DICTION["twitter"] = {} ##might be more structured, not necessary though
+    CACHE_DICTION["OMDB"] = {}  ## Specific part of cache for omdb
+    CACHE_DICTION["Twitter"] = {} ## Sepcific part of cache for twitter stuff
 
 
-
-##Getting OMDB data functions
+## Getting OMDB data functions
 def get_OMDB_data(omdb_search_term):
-    if omdb_search_term in CACHE_DICTION:
-        #print("\nUsing cached data for OMDB: " + omdb_search_term + "\n")
-        response = CACHE_DICTION[omdb_search_term]
+    if omdb_search_term in CACHE_DICTION["OMDB"]:
+        omdb_dict = CACHE_DICTION["OMDB"][omdb_search_term]
 
     else:
-        #print("\nfetching data for OMDB: " + omdb_search_term + "\n")
         base_url = "http://www.omdbapi.com/?"
         params = {}
         params['t'] = omdb_search_term
 
         r = requests.get(base_url, params=params)
-        response = json.loads(r.text)
-
-        CACHE_DICTION[omdb_search_term] = response
+        omdb_dict = json.loads(r.text)
+        CACHE_DICTION["OMDB"][omdb_search_term] = omdb_dict
 
         f = open(CACHE_FNAME, 'w')
         f.write(json.dumps(CACHE_DICTION))
         f.close()
-    return response
+
+    return omdb_dict
 
 
-#movie_dict = get_OMDB_data("Mean Girls")
-#print(movie_dict)
+def get_twitter_search_data(movie):
+    if movie in CACHE_DICTION["Twitter"]:
+        movie_tweets = CACHE_DICTION["Twitter"][movie]
+
+    else:
+        results = api.search(q = movie, count = 20)
+        movie_tweets = results["statuses"]
+        CACHE_DICTION["Twitter"][movie] = movie_tweets
+
+        f = open(CACHE_FNAME, "w")
+        f.write(json.dumps(CACHE_DICTION))
+        f.close()
+
+    return movie_tweets
+
+
+def get_twitter_user(username):
+    if username in CACHE_DICTION["Twitter"]:
+        user_data = CACHE_DICTION["Twitter"][username]
+
+    else:
+        user_data = api.get_user(username)
+        CACHE_DICTION["Twitter"][username] = user_data
+
+        cache_file = open(CACHE_FNAME, "w")
+        cache_file.write(json.dumps(CACHE_DICTION))
+        cache_file.close()
+
+    return user_data
+
+
+def emotion_score(movie_tweet_dict):
+    #creating list of positive words
+    pos_ws = []
+    f = open('positive-words.txt', 'r')
+    for l in f.readlines()[35:]:
+        pos_ws.append(l.strip())
+    f.close()
+
+    #creating a list of negative words
+    neg_ws = []
+    f = open('negative-words.txt', 'r')
+    for l in f.readlines()[35:]:
+        neg_ws.append(l.strip())
+    f.close
+
+    #putting all of the words from the text of the tweets into a single list
+    tweet_words = []
+    for tweet in movie_tweet_dict:
+        tweet_inst = Tweet(tweet)
+        text = tweet_inst.get_text()
+        tweet_words.append(text.split())
+
+
+    #compiling an emotion score of each tweet_words list about an entire movie
+    emotion_score = 0
+
+    for words in news_words:
+        if words in pos_ws:
+            emotion_score += 1
+        else:
+            pass
+
+    for words in news_words:
+        if words in neg_ws:
+            emotion_score += -1
+        else:
+            pass
+
+    #making a relative rating based on people's responses to the movie
+    num_words = len(tweet_words)
+    rating = int(emotion_score / num_words)
+
+
+    return emo_score
 
 
 class Movie(object):
-    def __init__(self, omdb_data):
-        self.omdb_data = omdb_data
-        self.imdbID = omdb_data["imdbID"] #$%^
-        self.title = omdb_data["Title"] #$%^
-        self.year = omdb_data["Year"]
-        self.released = omdb_data["Released"]
-        self.runtime = omdb_data["Runtime"]
-        self.genre = omdb_data["Genre"]
-        self.director = omdb_data["Director"] #$%^
-        self.writer = omdb_data["Writer"]
-        self.actors = omdb_data["Actors"]#.split(", ") #$%^
-        self.plot = omdb_data["Plot"]
-        self.language = omdb_data["Language"]#.split(", ") #$%^
-        self.country = omdb_data["Country"]
-        self.awards = omdb_data["Awards"]
-        self.poster = omdb_data["Poster"]
-        self.ratings_imdb = omdb_data["Ratings"][0]["Value"] #$%^
-        self.ratings_imdbvotes = omdb_data["imdbVotes"]
-        self.boxoffice = omdb_data["BoxOffice"]
+    def __init__(self, omdb_dict):
+        self.id = omdb_dict["imdbID"]
+        self.title = omdb_dict["Title"]
+        self.director = omdb_dict["Director"].split(", ")[0]
+        self.rating = omdb_dict["imdbRating"]
+        self.actors = omdb_dict["Actors"]
+        self.plot = omdb_dict["Plot"]
+        self.languages = omdb_dict["Language"]
+        self.awards = omdb_dict["Awards"]
+        self.boxoffice = omdb_dict["BoxOffice"]
 
-    #def __str__(self):
-    #    return("{} directed by {}, writing done by {},\nreleased {}, with actors {}, imdb rating of {}".format(self.title, self.director, self.writer, self.released, self.actors, self.ratings_imdb))
-
-    def get_actors(self):
-        return self.actors
-
-    def __str__(self): #was get_title
+    def __str__(self):
         return self.title
 
-    def get_languages(self):
-        num_languages = self.language.split(", ")
-        return (len(num_languages))
+    def get_title(self):
+        return self.title
 
-    def get_imdbID(self):
-        return self.imbdID
+    def get_director(self):
+        return self.director
 
-    def get_list_of_actors(self):
-        return self.actors.split(", ")
+    def get_rating(self):
+        return self.rating
 
-    def movie_info(self):
-        lst = [
-        self.title,
-        self.director,
-        self.rating_imdb,
-        self.actors,
-        self.imdbID
-        ]
-
-        return lst
-
-
-##Getting Twitter data functions
-def get_twitter_search_data(search_term):
-
-    if search_term in CACHE_DICTION:
-        #print("\nUsing cached data for TWITTER: " + search_term + "\n")
-        response = CACHE_DICTION[search_term]
-
-    else:
-        #print("\nFetching data for TWITTER:" + search_term + "\n")
-        results = api.search(q = search_term) # , count = 20 TAKEN OUT
-        response = results["statuses"]
-
-        CACHE_DICTION[search_term] = response
-
-        f = open(CACHE_FNAME, "w")
-        f.write(json.dumps(CACHE_DICTION))
-        f.close()
-    return response
-
-##
-def get_twitter_user_data(username):
-
-    if username in CACHE_DICTION:
-        #print("\nUsing cached data for twitter user: " + username + "\n")
-        response = CACHE_DICTION[username]
-
-    else:
-        #print("\nFetching data for twitter user: " + username + "\n")
-        response = api.get_user(username)
-        CACHE_DICTION[username] = response
-
-        f = open(CACHE_FNAME, "w")
-        f.write(json.dumps(CACHE_DICTION))
-        f.close()
-    return response
+    def infotuple(self):
+        return (self.id, self.title, self.director, self.rating, self.actors, self.plot, self.boxoffice, self.languages, self.awards)
 
 
 class Tweet(object):
+
     def __init__(self, tweet_dict):
-        self.id = tweet_dict["id"] ##primary key for tweet db
-        self.user = tweet_dict["user"]["id"]
-        self.text = tweet_dict["text"].encode("utf-8")
-        self.numfavorites = tweet_dict["favorite_count"]
-        self.numretweets = tweet_dict["retweet_count"]
+        self.tweet_id = tweet_dict["id"]
+        self.user_id = tweet_dict["user"]["id"]
+        self.text = tweet_dict["text"]
+        self.num_favs = tweet_dict["favorite_count"]
+        self.num_rt = tweet_dict["retweet_count"]
+
+    def __str__(self):
+        return self.text
 
     def tweet_content(self):
         return self.text
 
-    def tweet_id(self):
-        return self.id
+    def infotuple(self):
+        return (self.tweet_id, self.user_id, self.text, self.num_favs, self.num_rt)
 
-    def tweet_info(self):
-        lst = [
-        self.text, 
-        self.user, 
-        self.movie, 
-        self.numfavorites, 
-        self.retweets
-        ]
+class TwitterUsers(object):
+    def __init__(self, twitter_user_dict):
+        self.id = twitter_user_dict["id"]
+        self.username = twitter_user_dict["screen_name"]
+        self.num_followers = twitter_user_dict["followers_count"]
 
-        return lst
+    def __str__(self):
+        pass
 
-
-
-##List of movies to search
-movies_list = [
-    "Mean Girls", 
-    "Jason Bourne", 
-    "The Dark Night", 
-    "Pulp Fiction", 
-    "The Lord of the Rings: The Return of the King"
-    ]
+    def infotuple(self):
+        return (self.id, self.username, self.num_followers)
 
 
-##Making requests to the OMDB API
-OMDB_movie_requests = [get_OMDB_data(movie) for movie in movies_list]
 
 
-##Creating class instances of each movie from the movie list
-movie_classinsts = []
-for movie in OMDB_movie_requests:
-    movie_classinsts.append(Movie(movie))
-
-
-##Getting tweets about movies
-#tweets = []
-#for movie in movies_list:
-#    tweets.append(get_twitter_search_data(movie))
-
-
-#movie_tweets = []
-#for movie in movies_list:
-#    movie_tweets.append((movie, get_twitter_search_data(movie)))
+## List of movies
+movies_list = ["Mean Girls", "Jason Bourne", "The Dark Knight", "Pulp Fiction"]
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#make database thingy that does movies with ratings above 5 and 8
-
-#make thing that reads if something has been retweeted 500 times
-
-#make thingy that sorts the movies by number of awards then nomiations
-
-
+##Setting up databases
 conn = sqlite3.connect("si206finalproject.db")
 cur = conn.cursor()
 
-##Tweets table
 cur.execute("DROP TABLE IF EXISTS Tweets")
+cur.execute("DROP TABLE IF EXISTS Users")
+cur.execute("DROP TABLE IF EXISTS Movies")
+
+##Movies table
 statement = "CREATE TABLE IF NOT EXISTS "
-statement += "Tweets (tweet_id PRIMARY KEY, text TEXT, screen_name TEXT, movie_search TEXT, favorites INTEGER, retweets INTEGER)"
+statement += "Movies (imdbID PRIMARY KEY, title TEXT, director TEXT, rating TEXT, actors TEXT, plot TEXT, boxoffice TEXT, language TEXT, awards TEXT)"
+cur.execute(statement)
+
+##Tweets table
+statement = "CREATE TABLE IF NOT EXISTS "
+statement += "Tweets (tweet_id INTEGER PRIMARY KEY, username TEXT, text TEXT, num_favs INTEGER, rt INTEGER)"
 cur.execute(statement)
 
 ##Users table
-cur.execute("DROP TABLE IF EXISTS Users")
 statement = "CREATE TABLE IF NOT EXISTS "
 statement += "Users (user_id PRIMARY KEY, screen_name TEXT, favorites INTEGER, description TEXT, followers INTEGER)"
 cur.execute(statement)
 
-##Movies table
-cur.execute("DROP TABLE IF EXISTS Movies")
-statement = "CREATE TABLE IF NOT EXISTS "
-statement += "Movies (imdbID PRIMARY KEY, title TEXT, year TEXT, released TEXT, runtime TEXT, genre TEXT, director TEXT, writer TEXT, actors TEXT, plot TEXT, language TEXT, country TEXT, awards TEXT, poster TEXT, ratings_imdb INTEGER, ratings_imdbvotes INTEGER, boxoffice TEXT)"
-cur.execute(statement)
+
+##inserting into movies db
+statement = 'INSERT INTO Movies VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+
+movie_stuff = []
+
+movie_insts = [Movie(get_OMDB_data(movie)) for movie in movies_list]
+movie_info_list = [inst.infotuple() for inst in movie_insts]
+
+for movie in movie_info_list:
+    cur.execute(statement, movie)
+
+conn.commit()
+
+
+##inserting into Tweets db
+statement = 'INSERT INTO Tweets VALUES (?, ?, ?, ?, ?)'
+
+
+
+
+
+
+##Create an output
+output_fname = "si206_final_project_output.txt"
+f = open(output_fname, "w")
+
+f.write("The following movies were searched:\n")
+for movie in movies_list:
+    f.write("   " + movie + "\n")
+
+f.close()
 
 
 
@@ -266,22 +269,30 @@ cur.execute(statement)
 
 
 
-##RIP MY TEST CASES
+conn.close()
+
+
 
 ##Test cases
 #print("\n*** OUTPUT OF TESTS BELOW THIS LINE ***\n")
 
-class OMDB_tests(unittest.TestCase):
-    def test_omdb_movie_search(self):
-        #d = get_OMDB_data("Mean Girls")
-        #movie = Movie(d)
-        pass
-
-class Twitter_tests(unittest.TestCase):
-    pass
-
-class Database_tests(unittest.TestCase):
-    pass
+class Access_tests(unittest.TestCase):
+    def test_01_MeanGirls(self):
+        self.assertTrue("Mean Girls" in movies_list)
+    def test_02_MeanGirls(self):
+        self.assertTrue("Mean Girls" in CACHE_DICTION["OMDB"])
+    def test_03_JasonBourne(self):
+        self.assertTrue("Jason Bourne" in movies_list)
+    def test_04_JasonBourne(self):
+        self.assertTrue("Jason Bourne" in CACHE_DICTION["OMDB"])
+    def test_05_DarkKnight(self):
+        self.assertTrue("The Dark Knight" in movies_list)
+    def test_06_DarkKnight(self):
+        self.assertTrue("The Dark Knight" in CACHE_DICTION["OMDB"])
+    def test_07_PulpFiction(self):
+        self.assertTrue("Pulp Fiction" in movies_list)
+    def test_08_PulpFiction(self):
+        self.assertTrue("Pulp Fiction" in CACHE_DICTION["OMDB"])
 
 
 if __name__ == "__main__":
