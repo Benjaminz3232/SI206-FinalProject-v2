@@ -1,0 +1,176 @@
+SI 206 W17
+
+Put your name here: Benjamin Zeffer
+
+
+----
+
+
+Which option for the final project are you choosing -- 1, 2, or 3?
+>For the final project, I will be working on option 2, which will deal with APIS
+specifically of Twitter and OMDB.
+
+IF YOU ARE CHOOSING OPTION 3, answer the following questions:
+
+* Write 1-3 sentences summarizing what the goal of your project is:
+n/a
+* What are your two data sources? Provide links to documentation or websites you
+will be getting data from.
+n/a
+* Why are you proposing this project?
+n/a
+* What will the output of this project be? What will it look like, and what
+information will it contain?
+n/a
+* What are your concerns about this proposal?
+n/a
+
+-----
+
+
+THE FOLLOWING QUESTIONS ARE FOR EVERYONE. (Though they may be easier if you are
+choosing Option 1 or 2, because you can reference the Option 1 or 2 instructions.)
+
+* What will at least one of the classes you're going to define be called?
+>One of the classes that I will be defining will be called "Movie."
+
+
+* What will that class take as input to its constructor?
+>The class Movie will take a dictionary of movie data which will be fetched using
+the getMovieData function which I will be making to grab data from OMDB using API.
+
+
+* What will 1 instance of this class represent?
+>An instance of the class Movie will represent a singular movie (and the data 
+associated with that particular movie) along with instance variables and methods.
+
+
+* What are 3 instance variables this class will have? What will they be called,
+and what information will they hold? Why are they important?
+>Three of the instance variables that the class Movie will contain will be of the
+title of the movie (called "title"), director(s) of the movie (called "directors")
+and the actors that played in the film (called "actors").
+
+
+* Explain 2 methods the class will have that are not the class constructor
+(__init__ method) by answering the following questions for each.
+
+ONE METHOD:
+
+- What will the name of the method be?
+__str__
+
+
+- What will the method do?
+>The method __str__ prints the movie's title, director(s) and actors in a readable
+format (one line hopefully).
+
+
+- Will it take any additional input?
+>This method will take no additional inputs.
+
+
+- Will it return anything? Should it change anything about the instance/an
+instance variable?
+>This method will return a string containing the title of the movie and its
+director(s), and it will not be changing any instance variables.
+
+
+- Why is it useful for this class definition, in this program?
+>This particular method is going to be useful for presenting the user with the
+movie's title and director(s) in a user-friendly format (aka readable).
+
+
+ANOTHER METHOD:
+
+- What will the name of the method be?
+>get_actors
+
+
+- What will the method do?
+>This will fetch a list of the main actors in the movie from the OMDB API
+
+
+- Will it take any additional input? 
+>No.
+
+
+- Will it return anything? Should it change anything about the instance/an instance
+variable? 
+>This method will return a list of the actors.
+
+
+- Why is it useful for this class definition, in this program?
+>Having a list of the actors is especially useful if a person wants to know which
+actors are in the movie they've provided.
+
+
+
+
+* What will the tables in your database be?
+>Movies, Users and Tweets
+
+
+* What fields will each database table have? Which field of them is the primary key?
+You should list the fields for each database table here.
+Tweets:
+- tweet_
+
+
+id (primary key)
+- user_id
+- num_retweets
+- num_favorites
+- movie_title
+
+Users:
+- user_id (primary key)
+- screen_name
+- num_favorites
+
+Movies:
+- movie_id (primary key)
+- director
+- rating
+- num_languages
+- top_actor
+
+
+* List, in English, 2 queries you'll want to make from your database. At least one
+should be a JOIN. You can always change these later, but start with  ideas you're
+interested in and lessen the work on yourself later on! 
+(e.g. from class examples,
+maybe "I want to make a query that accesses the numbers of times each user has
+favorited tweets, and the number of times tweets that user posted have been
+favorited -- so I'll be joining the Tweets table and the Users table")
+
+
+>Query 1: I want to make a query that grabs data concerning movie titles which are
+mentioned in tweets, and the movie titles list, which will require me to join
+the Movies and Tweets tables.
+
+>Query 2: I am going to want to create a query that will access information about
+people posting the tweets, so I am going to need to join the Tweets and Users tables.
+
+
+* What are at least 2 of the data processing mechanics you're planning to use?
+>I am planning on using list comprehension and dictionary comprehension.
+
+
+
+* Why will each of those be useful to you? What data might you use it on? 
+(e.g. "Set comprehension: I think I'm going to be looking for unique names and
+proper nouns in this big set of text, so I'm going to use a set comprehension").
+>I am going to be using list comprehension so that I can query the Users database
+and create a list of users which will prove useful in terms of organizing a lot
+of data.
+>I will also need to use dictionary comprehension so that I can create a dicitonary
+with the twitter user_id as the keys and the content of their tweets as the values.
+
+
+
+* What will your output look like? Will it be a .txt file? a CSV file? something
+else? What information will it contain?
+>The output will most likely be a text file that contains varied queried info
+concerning the movies such a movie with the highest rating, user with the most likes
+on their tweet, and more.
