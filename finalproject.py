@@ -1,3 +1,7 @@
+# SI 206 FINAL PROJECT OPTION 2
+# by BENJAMIN ZEFFER
+
+
 ## Import statements
 import unittest
 import sqlite3
