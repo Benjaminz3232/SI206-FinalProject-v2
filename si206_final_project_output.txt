@@ -1,0 +1,484 @@
+The following movies were searched:
+
+Movie: 'Mean Girls'
+      Directed by:   Mark Waters
+      With actors:   Lindsay Lohan, Rachel McAdams, Tina Fey, Tim Meadows
+      IMDB Rating:   7.0
+       Movie plot:   Cady Heron is a hit with The Plastics, the A-list girl clique at her new school, until she makes the mistake of falling for Aaron Samuels, the ex-boyfriend of alpha Plastic Regina George.
+       Box office:   85,974,306.00
+           Awards:   7 wins & 24 nominations.
+        Languages:   English, German, Vietnamese, Swahili
+    OMDB Movie ID:   tt0377092
+    Emotion score:   -5
+
+Movie: 'Jason Bourne'
+      Directed by:   Paul Greengrass
+      With actors:   Matt Damon, Tommy Lee Jones, Alicia Vikander, Vincent Cassel
+      IMDB Rating:   6.7
+       Movie plot:   The CIA's most dangerous former operative is drawn out of hiding to uncover more explosive truths about his past.
+       Box office:   162,162,120.00
+           Awards:   1 win & 12 nominations.
+        Languages:   English, Greek, German
+    OMDB Movie ID:   tt4196776
+    Emotion score:   -2
+
+Movie: 'The Dark Knight'
+      Directed by:   Christopher Nolan
+      With actors:   Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine
+      IMDB Rating:   9.0
+       Movie plot:   When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the Dark Knight must come to terms with one of the greatest psychological tests of his ability to fight injustice.
+       Box office:   533,316,061.00
+           Awards:   Won 2 Oscars. Another 147 wins & 144 nominations.
+        Languages:   English, Mandarin
+    OMDB Movie ID:   tt0468569
+    Emotion score:   -3
+
+Movie: 'Pulp Fiction'
+      Directed by:   Quentin Tarantino
+      With actors:   Tim Roth, Amanda Plummer, Laura Lovelace, John Travolta
+      IMDB Rating:   8.9
+       Movie plot:   The lives of two mob hit men, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.
+       Box office:   /A
+           Awards:   Won 1 Oscar. Another 60 wins & 68 nominations.
+        Languages:   English, Spanish, French
+    OMDB Movie ID:   tt0110912
+    Emotion score:   0
+
+Movie: 'Deadpool'
+      Directed by:   Tim Miller
+      With actors:   Ryan Reynolds, Karan Soni, Ed Skrein, Michael Benyaer
+      IMDB Rating:   8.0
+       Movie plot:   A fast-talking mercenary with a morbid sense of humor is subjected to a rogue experiment that leaves him with accelerated healing powers and a quest for revenge.
+       Box office:   328,674,489.00
+           Awards:   Nominated for 2 Golden Globes. Another 19 wins & 57 nominations.
+        Languages:   English
+    OMDB Movie ID:   tt1431045
+    Emotion score:   -2
+
+Movie: 'Guardians of the Galaxy'
+      Directed by:   James Gunn
+      With actors:   Chris Pratt, Zoe Saldana, Dave Bautista, Vin Diesel
+      IMDB Rating:   8.1
+       Movie plot:   A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe.
+       Box office:   270,592,504.00
+           Awards:   Nominated for 2 Oscars. Another 50 wins & 96 nominations.
+        Languages:   English
+    OMDB Movie ID:   tt2015381
+    Emotion score:   1
+--------------------------------------
+
+Here's a list of the movies which were rated above a 7.5/10.0 on IMDB
+     The Dark Knight with a rating of 9.0
+     Pulp Fiction with a rating of 8.9
+     Deadpool with a rating of 8.0
+     Guardians of the Galaxy with a rating of 8.1
+
+--------------------------------------
+
+Here's a list of movies which earned over $50,000,000 in box office revenue:
+     Mean Girls with a box office of $85,974,306.00
+     Jason Bourne with a box office of $162,162,120.00
+     The Dark Knight with a box office of $533,316,061.00
+     Pulp Fiction with a box office of $/A
+     Deadpool with a box office of $328,674,489.00
+     Guardians of the Galaxy with a box office of $270,592,504.00
+
+--------------------------------------
+
+Here's a list of tweets about the movies that had over 1,500 favorites:
+     N/A -- no tweets over that number of favorites
+
+--------------------------------------
+
+Here's a list of all of the users who were mentioned in recent tweets regarding the movies above:
+      @Mascotmy_tweets
+
+      @pIayboi
+
+      @giIbertcocteau
+
+      @pearsfears
+
+      @gmail
+
+      @PicsForGirIs
+
+      @NaomiWWE
+
+      @jessccuh
+
+      @graciehaya
+
+      @Iwstpride
+
+      @damboudor_
+
+      @curvy_lips
+
+      @braversamantha
+
+      @bringthechicken
+
+      @CommonWhiteGrls
+
+      @delaneycleghorn
+
+      @CoreyKeyz
+
+      @xxHaleyMyers
+
+      @moniiochoaa
+
+      @Cinemartistry
+
+      @washingtonpost
+
+      @2000sPhase
+
+      @tidwell_nick
+
+      @iIovefilm
+
+      @SIRIUSXM
+
+      @MuslimsRComing
+
+      @TrappKelsee
+
+      @joni_bitchell
+
+      @Game152Hero
+
+      @GIRLposts
+
+      @girlposts
+
+      @chicagomag
+
+      @Menshealthmag
+
+      @medillschool
+
+      @gilbertjasono
+
+      @yahoo
+
+      @WillKeszei
+
+      @dylanobrien
+
+      @DylanOBrienAsia
+
+      @Shami1412
+
+      @YouTube
+
+      @TommyLeeOwnz
+
+      @Giants
+
+      @vidimovie
+
+      @distracted_monk
+
+      @JoshontheGo
+
+      @PastVox
+
+      @nickjma
+
+      @aabeaton
+
+      @BirdLawDS
+
+      @BTS_twt
+
+      @mattreevesLA
+
+      @haleyyblakee
+
+      @TwBookClub
+
+      @RezaAliAuthor
+
+      @SCUFAssist
+
+      @ScufGaming
+
+      @iyirepliklerim
+
+      @HuntOperator
+
+      @Steph3nSims
+
+      @xoxkasi
+
+      @kccheyenne
+
+      @UberFacts
+
+      @hotepdogfucker
+
+      @akaneyoshinaga
+
+      @chemtrailautism
+
+      @SHOTTYISMS
+
+      @Mumkey_Jones
+
+      @DavidNAtchison
+
+      @kharyrandolph
+
+      @clmazin
+
+      @johnaugust
+
+      @K11ForPresident
+
+      @DanHartFilm
+
+      @LauraBoyes2
+
+      @JLWilsonMedia
+
+      @readysteadycut
+
+      @ReadySteadyCut
+
+      @MakingOfs
+
+      @JCAirplane
+
+      @remiehhcrik
+
+      @colebrax
+
+      @WrongReel
+
+      @TheCinegogue
+
+      @DeEpps1
+
+      @FAIR_UR
+
+      @MalamPuisi_PKU
+
+      @perryxfenty
+
+      @Moviepicts
+
+      @melaniemae41
+
+      @CINEMAGEMS
+
+      @affection
+
+      @filmagraphy
+
+      @sabreapparel
+
+      @feedbacktlvsn
+
+      @HistoriaEnFotos
+
+      @trendssocial
+
+      @moviepoets
+
+      @Lanotadelcine
+
+      @callthemainland
+
+      @TheAmyXCX
+
+      @PlayerPrototype
+
+      @Batalla_Epica
+
+      @xolovesnette
+
+      @exoextra
+
+      @rejectnation
+
+      @oneperfectpod
+
+      @OnePerfectShot
+
+      @FilmDispenser
+
+      @Dedpool1979
+
+      @Timothay
+
+      @spenluke
+
+      @SHIELDYourEars
+
+      @dedpool1979
+
+      @loose_staples
+
+      @mrrobotpodcast
+
+      @GeneralBK
+
+      @dragonqueen1998
+
+      @lolaXbunny1
+
+      @kissycutie12
+
+      @im_a_screamer_
+
+      @VexedKillerQuin
+
+      @smolfluffysoo
+
+      @MiamiHurricanes
+
+      @USCTrojans
+
+      @WashWizards
+
+      @SacramentoKings
+
+      @Bengals
+
+      @nyjets
+
+      @Mets
+
+      @Eagles
+
+      @HISTORY
+
+      @LaineySnow
+
+      @rockstarenergy
+
+      @TwitchShare
+
+      @Retweet_Twitch
+
+      @TwitchSharing
+
+      @lcastboss15
+
+      @JeremiahSaint
+
+      @share_stream
+
+      @zaynsweetx
+
+      @hanzxol
+
+      @Spiderling_Not
+
+      @deadpool_we
+
+      @Amz_Spider
+
+      @VCredence_
+
+      @bqmxB506
+
+      @lesbisana
+
+      @thebestofmarvel
+
+      @GianHaeffener
+
+      @filmsoncanvas
+
+      @heisenboff
+
+      @CHANBAEKUNION
+
+      @WUUSHlXUN
+
+      @jonginternet
+
+      @_whitneylau
+
+      @genneo1
+
+      @longboxcast
+
+      @victoryroadpod
+
+      @archer9234
+
+      @MangaMag
+
+      @MangacastFR
+
+      @Kubo_FR
+
+      @LeSentierDb
+
+      @MerwaneB
+
+      @ctrIbeat
+
+      @Cinemex
+
+      @raisingwhasians
+
+      @AutismMomAvenge
+
+      @raisingwha
+
+      @QuarterPress
+
+      @PoweredbyFunko
+
+      @OriginalFunko
+
+      @SteveStfler
+
+      @anarebollosarq
+
+      @ComicBookNOW
+
+      @patriots
+
+      @Wario64
+
+      @bookmyshow
+
+      @BookMyShowID
+
+      @movienthusiast
+
+      @randiagi
+
+      @crackliffe
+
+      @AlexSteinman
+
+      @melroseee
+
+      @mad_hill
+
+      @Guardians
+
+      @EW
+
+      @The_T
+
+      @Doritos
+
+      @stedwardsu
+
+      @LoyolaChicago
+
+      @adage
+
+      @CenayangFilm
+
+      @visionfes
+
+      @EscolaCovent
